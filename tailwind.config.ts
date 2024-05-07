@@ -9,6 +9,10 @@ const config: Config = {
   theme: {
     colors: {
       "gray-details": "#a3a8a8",
+      "gray-note-to-show-background": "#364053",
+      "gray-note-to-show-hover": "#2B3341",
+      "blue-background": "#101728",
+      "blue-details": "#1F2737",
     },
     extend: {
       backgroundImage: {
