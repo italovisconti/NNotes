@@ -1,10 +1,21 @@
-import { TitleComponent } from "@/components/title/page";
+import { LogoSectionComponent } from "@/components/logoSection/page";
+import { NoteFromList } from "@/components/noteFromList/page";
+import { SearchBarComponent } from "@/components/searchBar/page";
+interface Note {
+  title: string;
+  content: string;
+}
+const note: Note = {
+  title: "Esta sera la nota del beta ddddddddd",
+  content: "Esta es la descripcion de la nota del beta",
+};
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <TitleComponent />
-      <p>Esta es la pagina principal de nuestra aplicacion de notas para la materia de Cloud Computing</p>
+    <main className="flex min-h-screen flex-col py-14 px-32 border">
+      <LogoSectionComponent />
+      <SearchBarComponent />
+      <NoteFromList note={note}/>
     </main>
   );
 }
