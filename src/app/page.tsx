@@ -12,7 +12,7 @@ const note: Note = {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col py-14 px-32 border">
+    <main className="flex min-h-screen flex-col py-14 px-32">
       <LogoSectionComponent />
       <SearchBarComponent />
       <NoteFromList note={note}/>
