@@ -14,6 +14,7 @@ const config: Config = {
       "blue-background": "#101728",
       "blue-details": "#1F2737",
       "green-hover-border": "#a3e635",
+      "black": "#090912",
     },
     extend: {
       backgroundImage: {
