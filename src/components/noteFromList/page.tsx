@@ -3,23 +3,23 @@ import Image from 'next/image'
 import React from 'react'
 
 interface Note {
+  id: number;
   title: string;
   content: string;
 }
 
-export const NoteFromList = ({ note, showModal }: { note: Note; showModal: any }) => {
-  function openModal(event: any) {
-    if(event.target.id === 'article' || event.target.id === 'article-text'){
-      console.log('Nota abierta');
-    }
-  }
+export const NoteFromList = ({ note, showModal, handleSetNote }: { note: Note; showModal: any, handleSetNote:any }) => {
   function deleteNote(event: any) {
     if(event.target.id === 'icon' || event.target.id === 'button') {
       console.log('Nota eliminada');
     }
   }
+  function setInfoModal(event: any) {
+      showModal(event);
+      handleSetNote(note);
+  }
   return (
-    <article id='article' className="rounded-lg border h-[250px] w-[350px] p-7 relative bg-gray-note-to-show-background group hover:border-green-hover-border cursor-pointer select-none" onClick={showModal}>
+    <article id='article' className="rounded-lg border h-[250px] w-[320px] p-7 relative bg-gray-note-to-show-background group hover:border-green-hover-border cursor-pointer select-none overflow-scroll overflow-x-hidden" onClick={setInfoModal}>
       <button id='button' className="rounded-tr-lg absolute top-[-1px] right-[-1px] border-t border-r p-3 cursor-pointer group-hover:border-green-hover-border bg-gray-note-to-show-background group" onClick={deleteNote}>
         <Image
           id='icon'
