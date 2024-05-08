@@ -2,7 +2,7 @@
 import { useState, createContext, useContext } from "react";
 
 export interface Note {
-  id: number;
+  _id: number;
   title: string;
   content: string;
 }
@@ -15,14 +15,12 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [action, setAction] = useState('');
-  const [note, setNote] = useState<Note>({ id:0, title: "", content: "" });
+  const [notes, setNotes] = useState<Note[]>([]);
 
   // EVENTOS
   const showModal = (event: any) => {
-    console.log(event.target.id);
     if(event.target.id === 'article' || event.target.id === 'article-text' || event.target.id === 'button-create' || event.target.id === 'img'){
       setOpen(true);
-      console.log('Nota abierta');
     }
   };
 
@@ -40,6 +38,44 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const getAllNotes = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notes`);
+      const data = await response.json();
+      contructorNoteList(data);
+      setLoading(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const contructorNoteList = (notesFromAPI: Note[]) => {
+    const notes = notesFromAPI.map(note => ({
+      _id: note._id,
+      title: note.title || `Titulo de nota ${note._id}`,
+      content: note.content || `Contenido de nota ${note._id}`,
+    }));
+    setNotes(notes);
+  }
+
+  const createNote = async (title: string, content: string) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: title,
+          content: content
+        }),
+      });
+      return response.status;
+    } catch (error) {
+      return 'Ocurrió un error al crear la nota. Inténtalo nuevamente.';
+    }
+  };
+
   const courtact = {
     loading,
     setLoading,
@@ -47,12 +83,14 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setOpen,
     action,
     setAction,
-    note,
-    setNote,
+    notes,
+    setNotes,
     // EVENTOS
     showModal,
     handleOk,
     handleCancel,
+    getAllNotes,
+    createNote,
   };
 
   return (
