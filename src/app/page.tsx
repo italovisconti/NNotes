@@ -5,12 +5,19 @@ import { ModalNoteComponent } from "@/components/modal/page";
 import { NoteLIst } from "@/components/noteList/page";
 import { SearchBarComponent } from "@/components/searchBar/page";
 import { useAppContext } from "@/utils/AppContext";
+import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const {
     open,
-    handleCancel
+    handleCancel,
+    getAllNotes,
   } = useAppContext();
+
+  useEffect(() => {
+    getAllNotes();
+  }, [])
 
   return (
     <main className="flex min-h-screen flex-col py-14 px-32">
@@ -26,6 +33,10 @@ export default function Home() {
       <div className="fixed bottom-0 right-0 p-6">
         <ButtonPlus />
       </div>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
     </main>
   );
 }
