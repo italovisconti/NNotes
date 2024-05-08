@@ -1,12 +1,7 @@
 'use client'
+import { Note } from '@/utils/AppContext';
 import Image from 'next/image'
 import React from 'react'
-
-interface Note {
-  id: number;
-  title: string;
-  content: string;
-}
 
 export const NoteFromList = ({ note, showModal, handleSetNote }: { note: Note; showModal: any, handleSetNote:any }) => {
   function deleteNote(event: any) {
