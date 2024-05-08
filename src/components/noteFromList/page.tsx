@@ -7,7 +7,7 @@ interface Note {
   content: string;
 }
 
-export const NoteFromList = ({ note }: { note: Note }) => {
+export const NoteFromList = ({ note, showModal }: { note: Note; showModal: any }) => {
   function openModal(event: any) {
     if(event.target.id === 'article' || event.target.id === 'article-text'){
       console.log('Nota abierta');
@@ -19,7 +19,7 @@ export const NoteFromList = ({ note }: { note: Note }) => {
     }
   }
   return (
-    <article id='article' className="rounded-lg border h-[250px] w-[350px] p-7 relative bg-gray-note-to-show-background group hover:border-green-hover-border cursor-pointer select-none" onClick={openModal}>
+    <article id='article' className="rounded-lg border h-[250px] w-[350px] p-7 relative bg-gray-note-to-show-background group hover:border-green-hover-border cursor-pointer select-none" onClick={showModal}>
       <button id='button' className="rounded-tr-lg absolute top-[-1px] right-[-1px] border-t border-r p-3 cursor-pointer group-hover:border-green-hover-border bg-gray-note-to-show-background group" onClick={deleteNote}>
         <Image
           id='icon'
