@@ -1,33 +1,53 @@
 import { Note, useAppContext } from '@/utils/AppContext';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import { json } from 'stream/consumers';
+import toast from 'react-hot-toast';
 
 export const ModalNoteComponent = ({}) => {
-  const [ currentNote, setCurrentNote ] = React.useState<Note>({ id:99999, title: "", content: "" });
+  const [ currentNote, setCurrentNote ] = React.useState<Note>({ _id:99999, title: "", content: "" });
   const {
     open,
     action,
-    handleCancel
+    handleCancel,
+    createNote,
+    setOpen,
+    getAllNotes,
   } = useAppContext();
+
   useEffect(() => {
     if (open) {
       if (action === 'update' && localStorage.getItem('note')) {
         const noteFromJson = JSON.parse(localStorage.getItem('note') || '{}') as Note;
         setCurrentNote({ ...noteFromJson });
       } else {
-        setCurrentNote({ id:99999, title: "", content: "" });
+        setCurrentNote({ _id:99999, title: "", content: "" });
       }
     } else {
-      setCurrentNote({ id:99999, title: "", content: "" });
+      setCurrentNote({ _id:99999, title: "", content: "" });
     }
   }, [open]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    console.log("🚀 ~ handleInputChange ~ name, value:", name, value)
     setCurrentNote({ ...currentNote, [name]: value });
   };
+
+  const handleCreateOrUpdateNote = async () => {
+    const title = document.getElementById('title') as HTMLInputElement;
+    const content = document.getElementById('content') as HTMLInputElement;
+    if(action === 'create'){
+      const response = await createNote(title.value, content.value);
+      if(response === 200){
+        setOpen(false);
+        getAllNotes();
+        toast.success('¡Nota creada con éxito!')
+      }else{
+        toast.error("¡Error al crear la nota!")
+      }
+    }else{
+      console.log('Editamos la nota');
+    }
+  }
 
   return (
     <article style={{ opacity: 1 }} id='article-modal' className='relative rounded-lg h-[50%] w-[80%] p-7 bg-gray-note-to-show-background group '>
@@ -45,7 +65,7 @@ export const ModalNoteComponent = ({}) => {
       <section className='flex flex-col justify-center items-start'>
         {/* Título de la nota */}
         <input
-          id='titulo'
+          id='title'
           type="text"
           style={{ backgroundColor: "transparent" }}
           className=" p-2 placeholder-gray-details focus:outline-none bg-transparent text-xl text-gray-details w-[80%] h-full"
@@ -65,7 +85,10 @@ export const ModalNoteComponent = ({}) => {
           onChange={handleInputChange}
         />
       </section>
-      <button className='w-full absolute bottom-0 left-0 bg-green-hover-border rounded-b-lg text-gray-note-to-show-background cursor-pointer py-3 hover:font-bold'>
+      <button
+        className='w-full absolute bottom-0 left-0 bg-green-hover-border rounded-b-lg text-gray-note-to-show-background cursor-pointer py-3 hover:font-bold'
+        onClick={handleCreateOrUpdateNote}
+      >
         {action === 'update' ? 'Actualizar' : 'Crear'}
       </button>
     </article>
