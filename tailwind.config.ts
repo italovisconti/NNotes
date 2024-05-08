@@ -13,6 +13,7 @@ const config: Config = {
       "gray-note-to-show-hover": "#2B3341",
       "blue-background": "#101728",
       "blue-details": "#1F2737",
+      "green-hover-border": "#a3e635",
     },
     extend: {
       backgroundImage: {
