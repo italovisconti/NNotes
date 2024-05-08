@@ -16,6 +16,8 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
   const [action, setAction] = useState('');
   const [notes, setNotes] = useState<Note[]>([]);
+  const [notesSearched, setNotesSearched] =  useState<Note[]>([]);
+  const [valueSearched, setValueSearched] = useState<string>('');
 
   // EVENTOS
   const showModal = (event: any) => {
@@ -85,6 +87,10 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setAction,
     notes,
     setNotes,
+    notesSearched,
+    setNotesSearched,
+    valueSearched,
+    setValueSearched,
     // EVENTOS
     showModal,
     handleOk,
