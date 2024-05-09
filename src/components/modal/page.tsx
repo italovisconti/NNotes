@@ -10,6 +10,7 @@ export const ModalNoteComponent = ({}) => {
     action,
     handleCancel,
     createNote,
+    updateNote,
     setOpen,
     getAllNotes,
   } = useAppContext();
@@ -45,7 +46,14 @@ export const ModalNoteComponent = ({}) => {
         toast.error("¡Error al crear la nota!")
       }
     }else{
-      console.log('Editamos la nota');
+      const response = await updateNote(currentNote._id, title.value, content.value);
+      if(response === 200){
+        setOpen(false);
+        getAllNotes();
+        toast.success('¡Nota actualizada con éxito!')
+      }else{
+        toast.error("¡Error al actualizar la nota!")
+      }
     }
   }
 

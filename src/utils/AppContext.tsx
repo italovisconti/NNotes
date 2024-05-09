@@ -78,6 +78,25 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const updateNote = async (noteID: String, title: string, content: string) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notes`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          _id: noteID,
+          title: title,
+          content: content
+        }),
+      });
+      return response.status;
+    } catch (error) {
+      return 'Ocurrió un error al crear la nota. Inténtalo nuevamente.';
+    }
+  }
+
   const deleteNote = async (noteID: String) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notes?_id=${noteID}`,{
@@ -111,6 +130,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     handleCancel,
     getAllNotes,
     createNote,
+    updateNote,
     deleteNote
   };
 
