@@ -78,6 +78,20 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const deleteNote = async (noteID: String) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notes?_id=${noteID}`,{
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      return response.status;
+    } catch (error) {
+      return 'Ocurrió un error al crear la nota. Inténtalo nuevamente.';
+    }
+  }
+
   const courtact = {
     loading,
     setLoading,
@@ -97,6 +111,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     handleCancel,
     getAllNotes,
     createNote,
+    deleteNote
   };
 
   return (
