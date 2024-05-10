@@ -7,8 +7,9 @@ After=network.target
 Environment=PORT=3001
 Type=simple
 User=ubuntu
-WorkingDirectory=/home/ubuntu/projects/NNotes
-ExecStart=/usr/bin/node npm run start -- --port 3001
+Restart=always
+RestartSec=1
+ExecStart=/home/ubuntu/projects/script.sh
 Restart=on-failure
 
 [Install]
