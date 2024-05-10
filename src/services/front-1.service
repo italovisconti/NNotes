@@ -7,8 +7,9 @@ After=network.target
 Environment=PORT=3001
 Type=simple
 User=ubuntu
-ExecStart=/usr/bin/node /opt/app/NNotes/
+WorkingDirectory=/opt/app/NNotes
+ExecStart=npm run start -- --port 3001
 Restart=on-failure
 
 [Install]
-WantedBy=multi-user.targ
+WantedBy=multi-user.target
