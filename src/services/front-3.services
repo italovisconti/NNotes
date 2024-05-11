@@ -1,14 +1,15 @@
 [Unit]
-Description=este es el front 3
-Documentation=https://github.com/test-app
+Description=Servicio del Front 3
+Documentation=https://github.com/italovisconti/NNotes/blob/main/src/services/front-3.service
 After=network.target
 
 [Service]
 Environment=PORT=3003
 Type=simple
 User=ubuntu
-WorkingDirectory=/opt/app/NNotes
-ExecStart=npm run start -- --port 3003
+Restart=always
+RestartSec=10
+ExecStart=/opt/scripts/script.sh
 Restart=on-failure
 
 [Install]

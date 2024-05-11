@@ -1,6 +1,6 @@
 [Unit]
-Description=este es el front 1
-Documentation=https://github.com/test-app
+Description=Servicio del Front 1
+Documentation=https://github.com/italovisconti/NNotes/blob/main/src/services/front-1.service
 After=network.target
 
 [Service]

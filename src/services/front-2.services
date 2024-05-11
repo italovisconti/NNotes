@@ -1,14 +1,15 @@
 [Unit]
-Description=este es el front 2
-Documentation=https://github.com/test-app
+Description=Servicio del Front 2
+Documentation=https://github.com/italovisconti/NNotes/blob/main/src/services/front-2.service
 After=network.target
 
 [Service]
 Environment=PORT=3002
 Type=simple
 User=ubuntu
-WorkingDirectory=/opt/app/NNotes
-ExecStart=npm run start -- --port 3002
+Restart=always
+RestartSec=10
+ExecStart=/opt/scripts/script.sh
 Restart=on-failure
 
 [Install]
