@@ -9,7 +9,7 @@ Type=simple
 User=ubuntu
 Restart=always
 RestartSec=10
-ExecStart=/home/ubuntu/projects/script.sh
+ExecStart=/opt/scripts/script.sh
 Restart=on-failure
 
 [Install]
