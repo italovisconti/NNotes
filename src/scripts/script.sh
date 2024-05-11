@@ -10,4 +10,4 @@ npm install
 npm run build
 
 # Ejecuta el comando npm start con el puerto 3001
-npm run start -- --port 3001
+npm start
