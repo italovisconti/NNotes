@@ -7,9 +7,9 @@ cd /opt/app/NNotes
 sudo npm install
 
 # Ejecuta el comando npm run build
-npm run build
+sudo npm run build
 
-sudo chmod +x "/opt/app/NNotes/.next"
+sudo chmod -R 755 /opt/app/NNotes/.next
 
 # Ejecuta el comando npm start con el puerto 3001
 npm start
