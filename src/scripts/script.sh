@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Damos los permisos
-chmod -R 777 /opt/app/NNotes/.next
-
 # Entramos en el folder app
 cd /opt/app/NNotes
 
