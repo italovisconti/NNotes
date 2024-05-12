@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Entramos en el forlder app
+# Entramos en el folder app
 cd /opt/app/NNotes
 
-# Instala las dependencias del proyecto
-npm install
+# Instala las dependencias del proyecto with sudo
+sudo npm install
 
 # Ejecuta el comando npm run build
 npm run build
