@@ -1,3 +1,5 @@
+![logoNNotes](https://github.com/italovisconti/NNotes/assets/108308939/ea1f5182-07e3-4ec4-a97a-4abebe03a047)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
